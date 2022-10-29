@@ -5,16 +5,23 @@ import argparse
 import bs4 as bs
 import pandas as pd
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.service import Service
+from webdriver_manager.firefox import GeckoDriverManager
 
 warnings.filterwarnings("ignore")
 logging.basicConfig(level=logging.INFO)
 
 
 def scrap(url, chrome_driver_path, N_SCROLL, output_path="", to_csv=False):
-    options = webdriver.ChromeOptions()
+    options = Options()
     options.add_argument('--headless')
     options.add_argument("--lang=id")
-    driver = webdriver.Chrome(chrome_driver_path, options=options)
+    service = Service(GeckoDriverManager().install())
+    driver = webdriver.Firefox(
+        options=options,
+        service=service,
+    )
     logging.info("opening url..")
     driver.get(url)
 

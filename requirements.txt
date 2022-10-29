@@ -5,3 +5,4 @@ pandas
 pysastrawi
 selenium
 beautifulsoup4
+webdriver-manager

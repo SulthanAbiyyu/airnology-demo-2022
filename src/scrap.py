@@ -9,6 +9,7 @@ import streamlit as st
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.utils import ChromeType
 
 warnings.filterwarnings("ignore")
 logging.basicConfig(level=logging.INFO)
@@ -20,7 +21,7 @@ def scrap(url, N_SCROLL, output_path="", to_csv=False):
     options.add_argument('--headless')
     options.add_argument("--lang=id")
     driver = webdriver.Chrome(
-        ChromeDriverManager().install(),
+        ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(),
         options=options,
     )
     logging.info("opening url..")

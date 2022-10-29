@@ -6,3 +6,4 @@ pysastrawi
 selenium
 beautifulsoup4
 webdriver-manager
+seleniumbase

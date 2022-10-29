@@ -7,23 +7,28 @@ import bs4 as bs
 import pandas as pd
 import streamlit as st
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver import FirefoxOptions
+# from selenium.webdriver.chrome.options import Options
+# from webdriver_manager.chrome import ChromeDriverManager
 
 warnings.filterwarnings("ignore")
 logging.basicConfig(level=logging.INFO)
 
 
 def scrap(url, N_SCROLL, output_path="", to_csv=False):
+    @st.experimental_singleton
+    def installff():
+        os.system('sbase install geckodriver')
+        os.system('ln -s /home/appuser/venv/lib/python3.7/site-packages/seleniumbase/drivers/geckodriver /home/appuser/venv/bin/geckodriver')
 
-    options = Options()
+    _ = installff()
+
+    options = FirefoxOptions()
     options.add_argument('--headless')
     options.add_argument("--lang=id")
     # service = Service(executable_path=ChromeDriverManager().install())
-    driver = webdriver.Chrome(
-        "../chromedriver",
-        options=options,
-    )
+    driver = webdriver.Firefox(options=options)
+
     logging.info("opening url..")
     driver.get(url)
 

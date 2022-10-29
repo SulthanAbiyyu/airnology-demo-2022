@@ -21,11 +21,9 @@ clean_button = st.checkbox("bersihkan data")
 hasil_data, hasil_user, hasil_ai, trend_sekitar, summary = st.tabs(
     ["sample data", "hasil user", "hasil analisis sentimen", "trend sekitar jabar", "ringkasan"])
 
-cpath = ChromeDriverManager().install()
-
 if button:
     with st.spinner("Scrapping data.."):
-        data = scrap(url, cpath, jumlah_scroll)
+        data = scrap(url, jumlah_scroll)
     if clean_button:
         with st.spinner("Membersihkan data.."):
             data = clean_text(data)

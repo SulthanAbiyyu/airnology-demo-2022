@@ -13,12 +13,10 @@ warnings.filterwarnings("ignore")
 logging.basicConfig(level=logging.INFO)
 
 
-def scrap(url, chrome_driver_path, N_SCROLL, output_path="", to_csv=False):
+def scrap(url, N_SCROLL, output_path="", to_csv=False):
     options = Options()
     options.add_argument('--headless')
     options.add_argument("--lang=id")
-    options.binary_location(
-        "/home/appuser/.wdm/drivers/geckodriver/linux64/0.32/geckodriver")
     service = Service(GeckoDriverManager().install())
     driver = webdriver.Firefox(
         options=options,

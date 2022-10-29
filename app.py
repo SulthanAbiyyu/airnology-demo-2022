@@ -1,7 +1,6 @@
 import streamlit as st
 import numpy as np
 import streamlit.components.v1 as components
-from transformers import AutoTokenizer, BertForSequenceClassification
 from src.scrap import scrap
 from src.preprocess_text import clean_text
 from src.make_wordcloud import make_wordcloud

@@ -18,8 +18,8 @@ st.markdown("### Alat blablbalba")
 url = st.text_input("Masukkan URL")
 jumlah_scroll = st.number_input(
     "Masukkan jumlah scroll", min_value=1, max_value=200, value=5)
-button = st.button("proses")
 clean_button = st.checkbox("bersihkan data")
+button = st.button("proses")
 hasil_data, hasil_user, hasil_ai, trend_sekitar, summary = st.tabs(
     ["sample data", "hasil user", "hasil analisis sentimen", "trend sekitar jabar", "ringkasan"])
 

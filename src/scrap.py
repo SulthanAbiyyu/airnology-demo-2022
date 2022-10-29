@@ -8,6 +8,7 @@ import pandas as pd
 import streamlit as st
 from selenium import webdriver
 from selenium.webdriver import FirefoxOptions
+from webdriver_manager.firefox import GeckoDriverManager
 
 warnings.filterwarnings("ignore")
 logging.basicConfig(level=logging.INFO)
@@ -26,6 +27,7 @@ def scrap(url, N_SCROLL, output_path="", to_csv=False):
     options.add_argument('--headless')
     options.add_argument("--lang=id")
     driver = webdriver.Firefox(
+        GeckoDriverManager().install(),
         options=options,
     )
     logging.info("opening url..")

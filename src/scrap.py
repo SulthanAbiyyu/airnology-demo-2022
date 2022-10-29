@@ -2,25 +2,31 @@ import time
 import logging
 import warnings
 import argparse
+import os
 import bs4 as bs
 import pandas as pd
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.service import Service
-from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver import FirefoxOptions
 
 warnings.filterwarnings("ignore")
 logging.basicConfig(level=logging.INFO)
 
 
+@st.experimental_singleton
+def installff():
+    os.system('sbase install geckodriver')
+    os.system('ln -s /home/appuser/venv/lib/python3.7/site-packages/seleniumbase/drivers/geckodriver /home/appuser/venv/bin/geckodriver')
+
+
+_ = installff()
+
+
 def scrap(url, N_SCROLL, output_path="", to_csv=False):
-    options = Options()
+    options = FirefoxOptions()
     options.add_argument('--headless')
     options.add_argument("--lang=id")
-    service = Service(GeckoDriverManager().install())
     driver = webdriver.Firefox(
         options=options,
-        service=service,
     )
     logging.info("opening url..")
     driver.get(url)

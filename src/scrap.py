@@ -20,6 +20,7 @@ logging.basicConfig(level=logging.INFO)
 
 def scrap(url, N_SCROLL, output_path="", to_csv=False):
     options = Options()
+    options.set_preference('intl.accept_languages', 'id')
     options.add_argument('--headless')
     options.add_argument("--lang=id")
     service = Service(GeckoDriverManager().install())
@@ -31,11 +32,11 @@ def scrap(url, N_SCROLL, output_path="", to_csv=False):
     # terbaru
     logging.info("click terbaru..")
     wait = WebDriverWait(driver, 10)
-    menu = wait.until(lambda driver: driver.find_element(By.XPATH, 
-        '//*[@id="QA0Szd"]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div[7]/div[2]/button'))
+    menu = wait.until(lambda driver: driver.find_element(By.XPATH,
+                                                         '//*[@id="QA0Szd"]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div[7]/div[2]/button'))
     menu.click()
-    terbaru = wait.until(lambda driver: driver.find_element(By.XPATH, 
-        '//*[@id="action-menu"]/ul/li[2]'))
+    terbaru = wait.until(lambda driver: driver.find_element(By.XPATH,
+                                                            '//*[@id="action-menu"]/ul/li[2]'))
     terbaru.click()
 
     time.sleep(1)
@@ -43,8 +44,8 @@ def scrap(url, N_SCROLL, output_path="", to_csv=False):
     # scroll down
     logging.info("scrolling down..")
     scrollable_div = driver.find_element(By.CSS_SELECTOR,
-        '#QA0Szd > div > div > div.w6VYqd > div.bJzME.tTVLSc > div > div.e07Vkf.kA9KIf > div > div > div.m6QErb.DxyBCb.kA9KIf.dS8AEf'
-    )
+                                         '#QA0Szd > div > div > div.w6VYqd > div.bJzME.tTVLSc > div > div.e07Vkf.kA9KIf > div > div > div.m6QErb.DxyBCb.kA9KIf.dS8AEf'
+                                         )
 
     for _ in range(N_SCROLL):
         driver.execute_script(

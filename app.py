@@ -1,5 +1,7 @@
 import streamlit as st
+import numpy as np
 import streamlit.components.v1 as components
+from transformers import AutoTokenizer, BertForSequenceClassification
 from src.scrap import scrap
 from src.preprocess_text import clean_text
 from src.make_wordcloud import make_wordcloud
@@ -58,6 +60,18 @@ with hasil_ai:
         st.text("masukkan URL terlebih dahulu!")
     else:
         st.markdown("**Hasil Review Dari User Menggunakan analisis sentimen**")
+        button_analisis = st.button("Jalankan Analisis Sentimen")
+        if button_analisis:
+            with st.spinner("Loading model.."):
+                tokenizer = AutoTokenizer.from_pretrained(
+                    "SulthanAbiyyu/indobert-tokenizer-basudara")
+                model = BertForSequenceClassification.from_pretrained(
+                    "SulthanAbiyyu/indobert-basudara-v1", num_labels=5)
+            with st.spinner("Analisis sentimen.."):
+                data = data.dropna(subset=["komentar"])
+                data["sentimen"] = data["komentar"].apply(lambda x: np.argmax(torch.nn.functional.softmax(
+                    model(**tokenizer([x], return_tensors='pt')).logits, dim=-1).detach().numpy()) + 1)
+            st.table(data.head())
 
 with trend_sekitar:
     st.markdown("**Trend Pariwisata di Jawa Barat**")

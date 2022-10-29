@@ -8,6 +8,4 @@ beautifulsoup4
 webdriver-manager
 seleniumbase
 lxml
-transformers
 numpy
-torch

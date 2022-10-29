@@ -26,8 +26,8 @@ def scrap(url, N_SCROLL, output_path="", to_csv=False):
     options = FirefoxOptions()
     options.add_argument('--headless')
     options.add_argument("--lang=id")
+    GeckoDriverManager().install()
     driver = webdriver.Firefox(
-        GeckoDriverManager().install(),
         options=options,
     )
     logging.info("opening url..")

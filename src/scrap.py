@@ -8,7 +8,6 @@ import pandas as pd
 import streamlit as st
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 warnings.filterwarnings("ignore")
@@ -20,9 +19,9 @@ def scrap(url, N_SCROLL, output_path="", to_csv=False):
     options = Options()
     options.add_argument('--headless')
     options.add_argument("--lang=id")
-    service = Service(executable_path=ChromeDriverManager().install())
+    # service = Service(executable_path=ChromeDriverManager().install())
     driver = webdriver.Chrome(
-        service=service,
+        "chromedriver.exe",
         options=options,
     )
     logging.info("opening url..")

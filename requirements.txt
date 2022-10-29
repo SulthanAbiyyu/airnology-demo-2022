@@ -1,1 +1,7 @@
 streamlit
+matplotlib
+wordcloud
+pandas
+pysastrawi
+selenium
+beautifulsoup4

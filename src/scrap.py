@@ -21,7 +21,7 @@ def scrap(url, N_SCROLL, output_path="", to_csv=False):
     options.add_argument("--lang=id")
     # service = Service(executable_path=ChromeDriverManager().install())
     driver = webdriver.Chrome(
-        "chromedriver.exe",
+        "../chromedriver",
         options=options,
     )
     logging.info("opening url..")

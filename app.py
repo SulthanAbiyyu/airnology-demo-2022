@@ -22,7 +22,7 @@ hasil_data, hasil_user, hasil_ai, trend_sekitar, summary = st.tabs(
 
 if button:
     with st.spinner("Scrapping data.."):
-        data = scrap(url, "./chromedriver.exe", jumlah_scroll)
+        data = scrap(url, "chromedriver.exe", jumlah_scroll)
     if clean_button:
         with st.spinner("Membersihkan data.."):
             data = clean_text(data)

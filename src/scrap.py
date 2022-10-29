@@ -10,6 +10,7 @@ from selenium import webdriver
 # from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
 
@@ -28,14 +29,14 @@ def scrap(url, N_SCROLL, output_path="", to_csv=False):
     driver.get(url)
 
     # terbaru
-    logging.info("click terbaru..")
-    wait = WebDriverWait(driver, 10)
-    menu = wait.until(lambda driver: driver.find_element_by_xpath(
-        '//*[@id="QA0Szd"]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div[7]/div[2]/button'))
-    menu.click()
-    terbaru = wait.until(lambda driver: driver.find_element_by_xpath(
-        '//*[@id="action-menu"]/ul/li[2]'))
-    terbaru.click()
+    # logging.info("click terbaru..")
+    # wait = WebDriverWait(driver, 10)
+    # menu = wait.until(lambda driver: driver.find_element_by_xpath(
+    #     '//*[@id="QA0Szd"]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div[7]/div[2]/button'))
+    # menu.click()
+    # terbaru = wait.until(lambda driver: driver.find_element_by_xpath(
+    #     '//*[@id="action-menu"]/ul/li[2]'))
+    # terbaru.click()
 
     time.sleep(1)
 

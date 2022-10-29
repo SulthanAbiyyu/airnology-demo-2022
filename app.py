@@ -1,4 +1,3 @@
-from webdriver_manager.chrome import ChromeDriverManager
 import streamlit as st
 from src.scrap import scrap
 from src.preprocess_text import clean_text

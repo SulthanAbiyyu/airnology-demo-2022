@@ -10,3 +10,4 @@ seleniumbase
 lxml
 transformers
 numpy
+torch

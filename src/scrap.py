@@ -10,7 +10,7 @@ from selenium import webdriver
 # from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
 
@@ -29,20 +29,20 @@ def scrap(url, N_SCROLL, output_path="", to_csv=False):
     driver.get(url)
 
     # terbaru
-    # logging.info("click terbaru..")
-    # wait = WebDriverWait(driver, 10)
-    # menu = wait.until(lambda driver: driver.find_element_by_xpath(
-    #     '//*[@id="QA0Szd"]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div[7]/div[2]/button'))
-    # menu.click()
-    # terbaru = wait.until(lambda driver: driver.find_element_by_xpath(
-    #     '//*[@id="action-menu"]/ul/li[2]'))
-    # terbaru.click()
+    logging.info("click terbaru..")
+    wait = WebDriverWait(driver, 10)
+    menu = wait.until(lambda driver: driver.find_element(By.XPATH, 
+        '//*[@id="QA0Szd"]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div[7]/div[2]/button'))
+    menu.click()
+    terbaru = wait.until(lambda driver: driver.find_element(By.XPATH, 
+        '//*[@id="action-menu"]/ul/li[2]'))
+    terbaru.click()
 
     time.sleep(1)
 
     # scroll down
     logging.info("scrolling down..")
-    scrollable_div = driver.find_element_by_css_selector(
+    scrollable_div = driver.find_element(By.CSS_SELECTOR,
         '#QA0Szd > div > div > div.w6VYqd > div.bJzME.tTVLSc > div > div.e07Vkf.kA9KIf > div > div > div.m6QErb.DxyBCb.kA9KIf.dS8AEf'
     )
 

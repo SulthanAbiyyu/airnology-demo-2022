@@ -58,23 +58,24 @@ with hasil_user:
                 st.text("Tidak ada komentar")
 
 with hasil_ai:
-    if not button:
-        st.text("masukkan URL terlebih dahulu!")
-    else:
-        st.markdown("**Hasil Review Dari User Menggunakan analisis sentimen**")
-        button_analisis = st.button("Jalankan Analisis Sentimen")
-        if button_analisis:
-            data = st.session_state.data
-            with st.spinner("Loading model.."):
-                tokenizer = AutoTokenizer.from_pretrained(
-                    "SulthanAbiyyu/indobert-tokenizer-basudara")
-                model = BertForSequenceClassification.from_pretrained(
-                    "SulthanAbiyyu/indobert-basudara-v1", num_labels=5)
-            with st.spinner("Analisis sentimen.."):
-                data = data.dropna(subset=["komentar"])
-                data["sentimen"] = data["komentar"].apply(lambda x: np.argmax(torch.nn.functional.softmax(
-                    model(**tokenizer([x], return_tensors='pt')).logits, dim=-1).detach().numpy()) + 1)
-            st.table(data.head())
+    st.markdown("**Hasil Review Dari User Menggunakan analisis sentimen**")
+    button_analisis = st.button("Jalankan Analisis Sentimen")
+    if button_analisis:
+        with st.spinner("Scrapping data.."):
+            data = scrap(url, jumlah_scroll)
+        if clean_button:
+            with st.spinner("Membersihkan data.."):
+                data = clean_text(data)
+        with st.spinner("Loading model.."):
+            tokenizer = AutoTokenizer.from_pretrained(
+                "SulthanAbiyyu/indobert-tokenizer-basudara")
+            model = BertForSequenceClassification.from_pretrained(
+                "SulthanAbiyyu/indobert-basudara-v1", num_labels=5)
+        with st.spinner("Analisis sentimen.."):
+            data = data.dropna(subset=["komentar"])
+            data["sentimen"] = data["komentar"].apply(lambda x: np.argmax(torch.nn.functional.softmax(
+                model(**tokenizer([x], return_tensors='pt')).logits, dim=-1).detach().numpy()) + 1)
+        st.table(data.head())
 
 with trend_sekitar:
     st.markdown("**Trend Pariwisata di Jawa Barat**")

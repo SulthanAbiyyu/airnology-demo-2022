@@ -30,6 +30,8 @@ if button:
         with st.spinner("Membersihkan data.."):
             data = clean_text(data)
 
+    st.session_state.data = data
+
 with hasil_data:
     if not button:
         st.text("masukkan URL terlebih dahulu!")
@@ -62,6 +64,7 @@ with hasil_ai:
         st.markdown("**Hasil Review Dari User Menggunakan analisis sentimen**")
         button_analisis = st.button("Jalankan Analisis Sentimen")
         if button_analisis:
+            data = st.session_state.data
             with st.spinner("Loading model.."):
                 tokenizer = AutoTokenizer.from_pretrained(
                     "SulthanAbiyyu/indobert-tokenizer-basudara")

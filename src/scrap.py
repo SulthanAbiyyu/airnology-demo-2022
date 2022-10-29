@@ -5,6 +5,7 @@ import argparse
 import os
 import bs4 as bs
 import pandas as pd
+import streamlit as st
 from selenium import webdriver
 from selenium.webdriver import FirefoxOptions
 
